@@ -70,3 +70,69 @@ User story writing pattern: As a [persona], I [want to], [so that].
 11. As a group member I want to be able to poll members
 12. As a user I want to be able to stream myself cooking my recipe
 13. As a user I want to be able to use instacart to purchase my recipe's ingredients
+
+---
+
+## Front End Data Requests
+
+
+
+### Endpoints
+ * ~/login/
+ * ~/register/
+ * ~/recipes/
+ * ~/recipes/{id}
+ * ~/search/{recipe_substring}
+ * ~/users/
+ * ~/users/{id}
+
+The following describes data requests between front and back:
+#### /login/
+Two scenarios:
+ * User does not authenticate:
+   * Status code: 401 + message: "No account found."
+   * Status code: 401 + message: "User has been banned."
+ * User does authenticate:
+   * User is admin:
+     * Account information
+     * All Recipes
+     * All Users
+   * User is not admin:
+     * Account information
+     * Recipes' title, description, thumbnail, and id (React manages this)
+
+#### /register/
+ * On success same as /login/
+ * On failure, relevant status code + message
+   * For example username is already taken, we can return "Username already exists".
+
+#### /recipes/
+This endpoint takes GET and POST requests.
+ * POST: used to create new recipes, takes json for a post
+ * GET used to get all recipes (only sent by admin accounts)
+
+#### /recipes/{id}
+Takes PUT, DELETE, and GET.
+ * GET is used by recipe page to view recipe details
+ * PUT is used to update a recipe that is being viewed by its creator (or admin approving it)
+ * DELETE is used to delete the recipe
+
+#### /search/{recipe_substring}
+Only serves GET requests
+ * Returns json array of recipes that have been filtered to have a named that contains recipe_substring
+
+#### /users/
+Only serves GET and POST requests
+ * POST used to create new users
+ * GET used to get all users (only sent by admin accounts)
+
+#### /users/{id}
+Takes PUT and GET requests.
+ * PUT is used to update account information
+ * GET is used to get account information (possibly only admins use this)
+
+
+---
+# Notes
+On admin page, add "Pending Approval" section for recipes that are awaiting approval.
+On admin page, have Users section for searching, banning, and unbanning users.
