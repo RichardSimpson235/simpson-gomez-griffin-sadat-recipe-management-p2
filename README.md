@@ -44,16 +44,16 @@ User story writing pattern: As a [persona], I [want to], [so that].
 7. As a user I want my recipes to display ingredient information
 8. As a user I want to be able to search for other users' recipes
 9. As a user I want to be able to upload media related to my recipe
-10. As a user I want to be able to share my recipe on social media
+10. As a user I want to be able to sort search results
 
 ### Planned Goals
 
-1. As a user I want to be able to sort search results
-2. As a user I want to be able to filter my searches
-3. As a user I want to be able to download the recipe
-4. As a user I want to be able to rate other people's recipes
-5. As a user I want to be able to comment on other people's recipes
-6. As a user I want to be able to see the average rating of a recipe
+1. As a user I want to be able to filter my searches
+2. As a user I want to be able to download the recipe
+3. As a user I want to be able to rate other people's recipes
+4. As a user I want to be able to comment on other people's recipes
+5. As a user I want to be able to see the average rating of a recipe
+6. As a user I want to be able to share my recipe on social media
 
 ### Stretch Goals
 
