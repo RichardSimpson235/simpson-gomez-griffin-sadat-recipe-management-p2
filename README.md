@@ -75,8 +75,6 @@ User story writing pattern: As a [persona], I [want to], [so that].
 
 ## Front End Data Requests
 
-
-
 ### Endpoints
  * ~/login/
  * ~/register/
@@ -140,3 +138,37 @@ On admin page, have Users section for searching, banning, and unbanning users.
 On Recipe model add disapproved field (type boolean). When approve and disapprove are both false, an admin has not review
 ed them yet. When they do they set either to true. If approve is true, then all users can find it. If disapprove is true,
 then the recipe's author will see it marked on their recipe.
+
+# Git Standards
+Here we'll describe our plans for git.
+
+## Branches
+Branching goes as:
+
+```
+* main
+|
+| * * dev
+    |
+    | * * wip-feature-repositories
+        |
+        | * * richard-media-repo /\ * * alejandro-recipe-repo
+        |                             |
+        |                             |
+```
+
+When your split feature branch (so richard-media-repo) is complete, you request a pull request on github.
+In paired programming, your partner checks the request to make sure everything is good (and by that I mean they clone
+the branch and run all tests to check that they pass. You can also view code changes on github to see what your partner
+did. Make sure that it's not going to conflict with your work!).
+
+## Commit Messages
+Follow this pattern for messageS:
+type: present tense description of change
+
+For example:
+feat: add RecipeService
+
+or 
+
+docs: Add explanation of searching by substring
