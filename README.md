@@ -136,3 +136,7 @@ Takes PUT and GET requests.
 # Notes
 On admin page, add "Pending Approval" section for recipes that are awaiting approval.
 On admin page, have Users section for searching, banning, and unbanning users.
+
+On Recipe model add disapproved field (type boolean). When approve and disapprove are both false, an admin has not review
+ed them yet. When they do they set either to true. If approve is true, then all users can find it. If disapprove is true,
+then the recipe's author will see it marked on their recipe.
