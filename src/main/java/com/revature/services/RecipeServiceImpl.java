@@ -3,12 +3,13 @@ package com.revature.services;
 import com.revature.repositories.RecipeRepository;
 import com.revature.models.Recipe;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
-
+@Service
 public class RecipeServiceImpl implements RecipeService{
 
     @Autowired
