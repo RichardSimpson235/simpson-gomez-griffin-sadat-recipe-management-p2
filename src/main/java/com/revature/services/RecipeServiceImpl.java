@@ -20,9 +20,8 @@ public class RecipeServiceImpl implements RecipeService{
     }
 
     @Override
-    public boolean deleteRecipe(int id) {
+    public void deleteRecipe(int id) {
         rc.deleteById(id);
-        return true;
     }
 
     @Override

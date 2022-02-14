@@ -16,9 +16,9 @@ public interface RecipeService {
     /**
      *
      * @param id      Takes a Recipe id to delete from the database.
-     * @return        Returns true if successful, false otherwise.
+     *
      */
-    public boolean deleteRecipe(int id);
+    public void deleteRecipe(int id);
 
     /**
      *
