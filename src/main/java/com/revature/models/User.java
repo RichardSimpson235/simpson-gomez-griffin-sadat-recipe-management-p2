@@ -19,7 +19,9 @@ public class User {
     @Column(name = "user_id", updatable = false)
     private int id;
 
-    private boolean banned;
+    private boolean banned = false;
+
+    private boolean admin = false;
 
     @Column(name = "first_name", length = 50)
     private String firstName;
