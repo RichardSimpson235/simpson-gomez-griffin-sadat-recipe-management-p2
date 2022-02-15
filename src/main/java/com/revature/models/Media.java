@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.io.File;
 
 @Data
 @NoArgsConstructor
@@ -21,4 +22,7 @@ public class Media {
     // type is the file extension
     private String type;
     private String title;
+
+    @Transient
+    private File data;
 }
