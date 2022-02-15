@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @NoArgsConstructor
@@ -18,9 +19,6 @@ public class Recipe {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int recipe_id;
 
-    @ManyToOne
-    @JoinColumn(name = "user_id")
-    private User user;
 
     private String name;
     private String description;
@@ -28,7 +26,38 @@ public class Recipe {
     private boolean approved;
 
 
+    /**
+     * Retrieves User data along with the Recipe data
+     */
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private User user;
 
+
+    /**
+     * Retrieves all instructions associated with the Recipe
+     */
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    private List<Instruction> instruction;
+
+
+    /**
+     * Retrieves all media associated with the Recipe
+     */
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
+    private List<Media> media;
+
+
+    /**
+     * Retrieves Ingredients list required for the Recipe
+     */
+    @ManyToMany(fetch = FetchType.EAGER)
+    @JoinTable(name = "ingredients",
+        joinColumns = @JoinColumn(name = "recipe_id"),
+        inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    private List<Ingredient> ingredient;
 
 
 }
