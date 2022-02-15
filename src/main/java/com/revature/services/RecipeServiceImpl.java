@@ -1,7 +1,7 @@
 package com.revature.services;
 
-import com.revature.repositories.RecipeRepository;
 import com.revature.models.Recipe;
+import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -22,7 +22,7 @@ public class RecipeServiceImpl implements RecipeService{
 
     @Override
     public void deleteRecipe(int id) {
-        rc.deleteById(id);
+         rc.deleteById(id);
     }
 
     @Override
@@ -44,8 +44,10 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public List<Recipe> search(String nameSubstring) {
         List<Recipe> recipes = (List<Recipe>) rc.findAll();
+
         return recipes.stream().filter(recipe ->
-            recipe.getName().matches(nameSubstring)
+            recipe.getName().toLowerCase().contains(nameSubstring)
         ).collect(Collectors.toList());
+
     }
 }
