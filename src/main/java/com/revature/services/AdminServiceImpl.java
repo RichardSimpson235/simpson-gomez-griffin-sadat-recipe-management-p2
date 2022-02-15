@@ -37,8 +37,8 @@ public class AdminServiceImpl implements AdminService {
      * and then confirms that the entity retrieved from the database
      * has the update.
      *
-     * @param user        the user to be banned
-     * @return            true when the ban was successful
+     * @param user        the user to be unbanned
+     * @return            true when the unban was successful
      */
     @Override
     public boolean unbanUser(User user) {
