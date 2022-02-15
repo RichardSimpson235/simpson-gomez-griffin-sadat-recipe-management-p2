@@ -24,10 +24,14 @@ public class Ingredient {
     @JoinColumn(name="foodstuff_id")
     private Foodstuff item;
 
+    // This method allows us to use Ingredient
+    // as if it had this field
     public String getName() {
         return item.getName();
     }
 
+    // This method allows us to use Ingredient
+    // as if it had this field
     public void setName(String name) {
         item.setName(name);
     }
