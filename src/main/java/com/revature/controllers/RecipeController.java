@@ -16,6 +16,13 @@ public class RecipeController {
     @Autowired
     private RecipeService recipeService;
 
+    /**
+     * This method serves the search endpoint. It requires a query parameter and uses
+     * those parameters to search. Currently only supports the name substring.
+     *
+     * @param params            parameter map of the query parameters of the request
+     * @return                  returns a response body list of recipes
+     */
     @GetMapping("/recipes/search")
     public List<Recipe> searchRecipe(@RequestParam Map<String, String> params) {
         String searchSubstring = params.get("name");
