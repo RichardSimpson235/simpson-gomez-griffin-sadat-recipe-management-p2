@@ -20,6 +20,7 @@ public class Instruction {
 
     private int step;
 
+    @Column(length = 50)
     private String text;
 
 }
