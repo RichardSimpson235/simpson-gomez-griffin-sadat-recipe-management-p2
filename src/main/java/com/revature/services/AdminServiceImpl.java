@@ -48,6 +48,14 @@ public class AdminServiceImpl implements AdminService {
         return user.isBanned() == usr.isBanned();
     }
 
+    /**
+     * Approves a recipe. This method sets the approved attribute to true
+     * and then confirms that the entity retrieved from the database
+     * has the update.
+     *
+     * @param recipe     the recipe to approve
+     * @return           true when the approval was successful
+     */
     @Override
     public boolean approveRecipe(Recipe recipe) {
         recipe.setApproved(true);
@@ -56,6 +64,14 @@ public class AdminServiceImpl implements AdminService {
         return recipe.isApproved() == r.isApproved();
     }
 
+    /**
+     * Disapproves a recipe. This method sets the disapproved attribute to true
+     * and then confirms that the entity retrieved from the database
+     * has the update.
+     *
+     * @param recipe     the recipe to disapprove
+     * @return           true when the disapproval was successful
+     */
     @Override
     public boolean disapproveRecipe(Recipe recipe) {
         recipe.setDisapproved(true);
