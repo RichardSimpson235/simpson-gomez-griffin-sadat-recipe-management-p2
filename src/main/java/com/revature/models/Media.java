@@ -23,6 +23,6 @@ public class Media {
     private String type;
     private String title;
 
-    @Transient
-    private File data;
+    @Lob
+    private byte[] data;
 }
