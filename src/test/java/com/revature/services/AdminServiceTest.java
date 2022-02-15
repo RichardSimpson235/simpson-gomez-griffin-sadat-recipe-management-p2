@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import com.revature.models.Recipe;
 import com.revature.models.User;
 import com.revature.repositories.RecipeRepository;
 import com.revature.repositories.UserRepository;
@@ -47,5 +48,29 @@ public class AdminServiceTest {
         when(userRepository.save(userIn)).thenReturn(userOut);
 
         assertTrue(adminService.unbanUser(userIn));
+    }
+
+    @Test
+    public void testApproveRecipe() {
+        Recipe recipeIn = new Recipe();
+        Recipe recipeOut = new Recipe();
+        recipeIn.setApproved(false);
+        recipeOut.setApproved(true);
+
+        when(recipeRepository.save(recipeIn)).thenReturn(recipeOut);
+
+        assertTrue(adminService.approveRecipe(recipeIn));
+    }
+
+    @Test
+    public void testDisapproveRecipe() {
+        Recipe recipeIn = new Recipe();
+        Recipe recipeOut = new Recipe();
+        recipeIn.setDisapproved(false);
+        recipeOut.setDisapproved(true);
+
+        when(recipeRepository.save(recipeIn)).thenReturn(recipeOut);
+
+        assertTrue(adminService.disapproveRecipe(recipeIn));
     }
 }
