@@ -163,7 +163,7 @@ the branch and run all tests to check that they pass. You can also view code cha
 did. Make sure that it's not going to conflict with your work!).
 
 ## Commit Messages
-Follow this pattern for messageS:
+Follow this pattern for messages:
 type: present tense description of change
 
 For example:
