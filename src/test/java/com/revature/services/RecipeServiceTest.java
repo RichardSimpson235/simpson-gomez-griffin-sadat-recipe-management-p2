@@ -27,16 +27,11 @@ public class RecipeServiceTest {
 
     @Test
     void createRecipe() {
+        User user = new User();
+        user.setUser_id(1);
         Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
-        recipe.setApproved(true);
-        recipe.setName("Rice buns");
-        recipe.setUser(new User());
-        recipe.setServings(3);
-        recipe.setCook_time(1);
-        recipe.setLikes(3);
-        recipe.setDislikes(6);
-        recipe.setDescription("Nice Rice buns");
+        recipe.setUser(user);
+
 
         Mockito.when(rp.save(recipe)).thenReturn(new Recipe());
 
@@ -46,17 +41,10 @@ public class RecipeServiceTest {
 
     @Test
     void deleteRecipe() {
+        User user = new User();
+        user.setUser_id(1);
         Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
-        recipe.setApproved(true);
-        recipe.setName("Rice buns");
-        recipe.setUser(new User());
-        recipe.setServings(3);
-        recipe.setCook_time(1);
-        recipe.setLikes(3);
-        recipe.setDislikes(6);
-        recipe.setDescription("Nice Rice buns");
-
+        recipe.setUser(user);
 
         rs.deleteRecipe(recipe.getRecipe_id());
         Mockito.verify(rp).deleteById(recipe.getRecipe_id());
@@ -64,6 +52,8 @@ public class RecipeServiceTest {
 
     @Test
     void getRecipeById() {
+        User user = new User();
+        user.setUser_id(1);
         Recipe recipe = new Recipe();
         recipe.setRecipe_id(1);
         recipe.setApproved(true);
@@ -84,6 +74,8 @@ public class RecipeServiceTest {
 
     @Test
     void getAllRecipes() {
+        User user = new User();
+        user.setUser_id(1);
         Recipe recipe = new Recipe();
         recipe.setRecipe_id(1);
         recipe.setApproved(true);
@@ -105,23 +97,15 @@ public class RecipeServiceTest {
 
     @Test
     void updateRecipe() {
+        User user = new User();
+        user.setUser_id(1);
         Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
-        recipe.setApproved(true);
-        recipe.setName("Rice buns");
-        recipe.setUser(new User());
-        recipe.setServings(3);
-        recipe.setCook_time(1);
-        recipe.setLikes(3);
-        recipe.setDislikes(6);
-        recipe.setDescription("Nice Rice buns");
+
+        recipe.setUser(user);
 
 
-        Mockito.when(rp.save(recipe)).thenReturn(new Recipe(
-                2,"salad", "nice salad", 10,
-                4, 0, 0, false, new User())
-        );
-        recipe.setRecipe_id(2);
+        Mockito.when(rp.save(recipe)).thenReturn(new Recipe());
+
         Recipe recipe1 = rs.updateRecipe(recipe);
 
         Assertions.assertEquals(recipe1.getRecipe_id(), recipe.getRecipe_id());
@@ -130,17 +114,11 @@ public class RecipeServiceTest {
 
     @Test
     void searchRecipe() {
+        User user = new User();
+        user.setUser_id(1);
         Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
-        recipe.setApproved(true);
         recipe.setName("Rice buns");
-        recipe.setUser(new User());
-        recipe.setServings(3);
-        recipe.setCook_time(1);
-        recipe.setLikes(3);
-        recipe.setDislikes(6);
-        recipe.setDescription("Nice Rice buns");
-
+        recipe.setUser(user);
 
         List<Recipe> recipeList = new ArrayList<>();
         recipeList.add(recipe);
