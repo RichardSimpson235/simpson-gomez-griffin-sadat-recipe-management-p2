@@ -16,6 +16,14 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    /**
+     * Bans a user. This method sets the banned attribute to true
+     * and then confirms that the entity retrieved from the database
+     * has the update.
+     *
+     * @param user        the user to be banned
+     * @return            true when the ban was successful
+     */
     @Override
     public boolean banUser(User user) {
         user.setBanned(true);
@@ -24,6 +32,14 @@ public class AdminServiceImpl implements AdminService {
         return user.isBanned() == usr.isBanned();
     }
 
+    /**
+     * Unbans a user. This method sets the banned attribute to false
+     * and then confirms that the entity retrieved from the database
+     * has the update.
+     *
+     * @param user        the user to be banned
+     * @return            true when the ban was successful
+     */
     @Override
     public boolean unbanUser(User user) {
         user.setBanned(false);
