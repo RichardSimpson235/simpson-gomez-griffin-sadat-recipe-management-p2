@@ -2,6 +2,7 @@ package com.revature.repositories;
 
 import com.revature.models.Recipe;
 import org.springframework.data.repository.CrudRepository;
+import org.springframework.stereotype.Repository;
 
 /**
  * RecipeRepository extends CrudRepository to perform CRUD Operations on the Database
@@ -12,6 +13,7 @@ import org.springframework.data.repository.CrudRepository;
  * deleteById() -> deletes data in the database with the parsed ID
  *
  */
+@Repository
 public interface RecipeRepository extends CrudRepository<Recipe, Integer> {
 
 }
