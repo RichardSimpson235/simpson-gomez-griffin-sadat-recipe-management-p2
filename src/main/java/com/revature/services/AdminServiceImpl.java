@@ -50,11 +50,17 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public boolean approveRecipe(Recipe recipe) {
-        return false;
+        recipe.setApproved(true);
+        Recipe r = recipeRepository.save(recipe);
+
+        return recipe.isApproved() == r.isApproved();
     }
 
     @Override
     public boolean disapproveRecipe(Recipe recipe) {
-        return false;
+        recipe.setDisapproved(true);
+        Recipe r = recipeRepository.save(recipe);
+
+        return recipe.isDisapproved() == r.isDisapproved();
     }
 }
