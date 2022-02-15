@@ -115,8 +115,8 @@ Takes PUT, DELETE, and GET.
  * PUT is used to update a recipe that is being viewed by its creator (or admin approving it)
  * DELETE is used to delete the recipe
 
-#### /search/{recipe_substring}
-Only serves GET requests
+#### /recipes/search
+Only serves GET requests with query parameters
  * Returns json array of recipes that have been filtered to have a named that contains recipe_substring
 
 #### /users/
