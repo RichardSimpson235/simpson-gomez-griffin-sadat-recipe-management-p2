@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.models.Recipe;
+import com.revature.models.User;
 import com.revature.services.RecipeService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,5 +42,31 @@ public class RecipeControllerTest {
                 MockMvcResultMatchers.status().isOk(),
                 MockMvcResultMatchers.jsonPath("$[0].name").value("Rice pilaf")
         );
+    }
+
+
+    @Test
+    void getAllRecipes() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setName("Rice bun");
+        List<Recipe> recipeList = new ArrayList<>();
+        recipeList.add(recipe);
+
+        when(recipeService.getAll()).thenReturn(recipeList);
+
+        ResultActions rs = mvc.perform(MockMvcRequestBuilders.get("/recipes"));
+        rs.andExpect(MockMvcResultMatchers.status().isOk());
+    }
+
+    @Test
+    void getRecipeById() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setRecipe_id(1);
+
+        when(recipeService.getRecipeById(1)).thenReturn(new Recipe());
+
+        ResultActions rs = mvc.perform(MockMvcRequestBuilders.get("/recipes/1"));
+        rs.andExpect(MockMvcResultMatchers.status().isOk());
+
     }
 }
