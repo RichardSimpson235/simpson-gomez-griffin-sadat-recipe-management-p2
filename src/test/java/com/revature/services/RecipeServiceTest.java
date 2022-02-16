@@ -55,15 +55,8 @@ public class RecipeServiceTest {
         User user = new User();
         user.setUser_id(1);
         Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
-        recipe.setApproved(true);
-        recipe.setName("Rice buns");
-        recipe.setUser(new User());
-        recipe.setServings(3);
-        recipe.setCook_time(1);
-        recipe.setLikes(3);
-        recipe.setDislikes(6);
-        recipe.setDescription("Nice Rice buns");
+        recipe.setUser(user);
+
 
         Optional<Recipe> optionalRecipe = Optional.of(recipe);
         Mockito.when(rp.findById(recipe.getRecipe_id())).thenReturn(optionalRecipe);
@@ -77,15 +70,9 @@ public class RecipeServiceTest {
         User user = new User();
         user.setUser_id(1);
         Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
-        recipe.setApproved(true);
         recipe.setName("Rice buns");
-        recipe.setUser(new User());
-        recipe.setServings(3);
-        recipe.setCook_time(1);
-        recipe.setLikes(3);
-        recipe.setDislikes(6);
-        recipe.setDescription("Nice Rice buns");
+        recipe.setUser(user);
+
 
         List<Recipe> recipeList = new ArrayList<>();
         recipeList.add(recipe);
