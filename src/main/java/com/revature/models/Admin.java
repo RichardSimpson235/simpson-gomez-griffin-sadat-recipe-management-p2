@@ -1,5 +1,4 @@
 package com.revature.models;
 
-public class Media {
-  
+public class Admin {
 }
