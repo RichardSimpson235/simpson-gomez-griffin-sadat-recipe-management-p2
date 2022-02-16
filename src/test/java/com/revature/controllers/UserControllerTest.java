@@ -8,13 +8,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+
 import org.springframework.http.MediaType;
+
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+
+import java.util.Optional;
 
 import static org.mockito.Mockito.when;
 
@@ -27,6 +29,18 @@ public class UserControllerTest {
 
     @MockBean
     private UserService userService;
+  
+    @Test
+    void getUserById() throws Exception {
+        User user = new User();
+        user.setUser_id(1);
+
+        when(userService.getUserById(1)).thenReturn(Optional.of(new User()));
+
+        ResultActions rs = mvc.perform(MockMvcRequestBuilders.get("/users/1"));
+        rs.andExpect(MockMvcResultMatchers.status().isOk());
+
+    }
 
     @Test
     public void testAddUser() throws Exception {
@@ -47,5 +61,4 @@ public class UserControllerTest {
         );
 
     }
-
 }
