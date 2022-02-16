@@ -15,6 +15,7 @@ public class Foodstuff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "foodstuff_id")
     private int id;
 
     @Column(length = 50)
