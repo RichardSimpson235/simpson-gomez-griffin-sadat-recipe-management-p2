@@ -46,6 +46,12 @@ public class UserIntegrationTest {
     }
 
     @Test
+    public void findUserById() {
+        Optional<User> opUser = userRepository.findById(1);
+        assertTrue(opUser.isPresent());
+    }
+
+    @Test
     public void testFindAllUsers() {
         List<User> users = (List<User>) userRepository.findAll();
 
