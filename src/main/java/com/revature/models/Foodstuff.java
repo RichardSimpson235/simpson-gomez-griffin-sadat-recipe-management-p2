@@ -5,24 +5,19 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.io.File;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="media")
-public class Media {
+@Table(name = "foodstuff")
+public class Foodstuff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "media_id", updatable = false)
+    @Column(name = "foodstuff_id")
     private int id;
 
-    // type is the file extension
-    private String type;
-    private String title;
-
-    @Lob
-    private byte[] data;
+    @Column(length = 50)
+    private String name;
 }
