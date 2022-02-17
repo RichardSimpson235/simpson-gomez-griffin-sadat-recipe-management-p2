@@ -57,4 +57,18 @@ public class UserIntegrationTest {
 
         assertEquals(users.size(), 1);
     }
+
+    @Test
+    public void testUpdateUser() {
+        Optional<User> opUser = userRepository.findById(1);
+        assertTrue(opUser.isPresent());
+
+        User user = opUser.get();
+
+        user.setBanned(true);
+
+        User u = userRepository.save(user);
+
+        assertTrue(u.isBanned());
+    }
 }
