@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
 import java.util.Optional;
 
 @CrossOrigin
@@ -40,4 +41,11 @@ public class UserController {
     public User addUser(@RequestBody User user) {
         return userService.registerUser(user);
     }
-}
+
+    @GetMapping(value = "/users")
+    public List<User> getAllUsers(){
+        return userService.getAllUsers();
+    }
+
+
+    }
