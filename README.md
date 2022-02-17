@@ -121,6 +121,7 @@ Only serves GET requests
 
 #### /users/
 Only serves GET
+ * POST used to edit users (admins only)
  * GET used to get all users (only sent by admin accounts)
 
 #### /users/{id}
