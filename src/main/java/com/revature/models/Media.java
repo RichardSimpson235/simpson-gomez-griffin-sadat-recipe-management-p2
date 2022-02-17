@@ -18,7 +18,6 @@ public class Media {
     @Column(name = "media_id", updatable = false)
     private int id;
 
-    // type is the file extension
     @Column(length = 50)
     private String type;
 
