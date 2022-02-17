@@ -53,10 +53,8 @@ public class Recipe {
     /**
      * Retrieves Ingredients list required for the Recipe
      */
-    @ManyToMany(fetch = FetchType.EAGER)
-    @JoinTable(name = "ingredients",
-        joinColumns = @JoinColumn(name = "recipe_id"),
-        inverseJoinColumns = @JoinColumn(name = "ingredient_id"))
+    @OneToMany
+    @JoinColumn(name = "recipe_id")
     private List<Ingredient> ingredient;
 
 
