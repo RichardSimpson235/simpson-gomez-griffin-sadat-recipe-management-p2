@@ -120,8 +120,7 @@ Only serves GET requests
  * Returns json array of recipes that have been filtered to have a named that contains recipe_substring
 
 #### /users/
-Only serves GET and POST requests
- * POST used to create new users
+Only serves GET
  * GET used to get all users (only sent by admin accounts)
 
 #### /users/{id}
