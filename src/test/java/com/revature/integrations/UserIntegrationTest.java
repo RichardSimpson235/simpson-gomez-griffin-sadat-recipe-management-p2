@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import javax.transaction.Transactional;
+import java.util.List;
 import java.util.Optional;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -42,5 +43,12 @@ public class UserIntegrationTest {
         assertNotEquals(u.getId(), 0);
         assertEquals(u.getUsername(), user.getUsername());
         assertEquals(u.getPassword(), user.getPassword());
+    }
+
+    @Test
+    public void testFindAllUsers() {
+        List<User> users = (List<User>) userRepository.findAll();
+
+        assertEquals(users.size(), 1);
     }
 }
