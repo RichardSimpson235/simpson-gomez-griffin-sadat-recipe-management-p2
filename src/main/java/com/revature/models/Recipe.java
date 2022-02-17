@@ -45,7 +45,7 @@ public class Recipe {
     /**
      * Retrieves all instructions associated with the Recipe
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id")
     private List<Instruction> instruction;
 
@@ -53,7 +53,7 @@ public class Recipe {
     /**
      * Retrieves all media associated with the Recipe
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id")
     private List<Media> media;
 
@@ -61,7 +61,7 @@ public class Recipe {
     /**
      * Retrieves Ingredients list required for the Recipe
      */
-    @OneToMany
+    @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id")
     private List<Ingredient> ingredient;
 
