@@ -17,11 +17,23 @@ public class UserController {
     @Autowired
     private UserService userService;
 
+
+    /**
+     * This method is used to register a new user account.
+     *
+     * @param user             user data to persist
+     * @return                 User object representing their data
+     */
     @PostMapping(value = "/register")
     public User addUser(@RequestBody User user) {
         return userService.registerUser(user);
     }
 
+    /**
+     * This method is used to get all of the users in the database.
+     *
+     * @return                 a list of all the users
+     */
     @GetMapping(value = "/users")
     public List<User> getAllUsers(){
         System.out.println("Getting all users");
