@@ -9,7 +9,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.transaction.Transactional;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 
 @SpringBootTest(classes = com.revature.driver.Application.class)
 @Transactional
@@ -23,5 +23,24 @@ public class UserIntegrationTest {
         Optional<User> opUser = userRepository.findByUsernameAndPassword("username", "password");
 
         assertTrue(opUser.isPresent());
+    }
+
+    @Test
+    public void testRegisterNewUser() {
+        User user = new User();
+        user.setEmail("newemail@gmail.com");
+        user.setUsername("new");
+        user.setPassword("pass");
+        user.setDateOfBirth(0);
+        user.setRegistrationDate(0);
+        user.setFirstName("firsty");
+        user.setLastName("lasty");
+        user.setPhone("555-8888");
+
+        User u = userRepository.save(user);
+
+        assertNotEquals(u.getId(), 0);
+        assertEquals(u.getUsername(), user.getUsername());
+        assertEquals(u.getPassword(), user.getPassword());
     }
 }
