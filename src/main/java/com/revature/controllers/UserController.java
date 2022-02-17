@@ -35,8 +35,6 @@ public class UserController {
 
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
-  
-    private UserService userService;
 
     @PostMapping(value = "/register")
     public User addUser(@RequestBody User user) {
