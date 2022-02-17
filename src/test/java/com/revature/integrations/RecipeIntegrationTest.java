@@ -139,4 +139,10 @@ public class RecipeIntegrationTest {
         assertEquals(newRecipe.getMedia().size(), 1);
         assertNotEquals(newRecipe.getMedia().get(0).getId(), 0);
     }
+
+    @Test
+    public void testDeleteById() {
+        recipeRepository.deleteById(1);
+        assertFalse(recipeRepository.findById(1).isPresent());
+    }
 }
