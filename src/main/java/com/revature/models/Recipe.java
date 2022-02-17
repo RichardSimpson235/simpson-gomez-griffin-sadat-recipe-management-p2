@@ -20,7 +20,9 @@ public class Recipe {
     private int recipe_id;
 
 
+    @Column(length = 50)
     private String name;
+    @Column(length = 500)
     private String description;
     private int cook_time, servings, likes, dislikes;
     private boolean approved;
