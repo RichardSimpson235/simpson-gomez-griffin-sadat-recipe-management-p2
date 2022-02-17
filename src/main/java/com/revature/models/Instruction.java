@@ -13,8 +13,6 @@ import javax.persistence.*;
 @Table(name="instructions")
 public class Instruction {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "instruction_id", updatable = false)
     private int id;
 
@@ -22,5 +20,4 @@ public class Instruction {
 
     @Column(length = 50)
     private String text;
-
 }
