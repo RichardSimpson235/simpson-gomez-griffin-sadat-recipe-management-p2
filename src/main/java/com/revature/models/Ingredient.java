@@ -21,7 +21,7 @@ public class Ingredient {
     @Column(length = 50)
     private String amount;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name="foodstuff_id")
     private Foodstuff item;
 
