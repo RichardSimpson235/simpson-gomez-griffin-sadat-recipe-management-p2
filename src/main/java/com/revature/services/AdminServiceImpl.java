@@ -7,6 +7,8 @@ import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 @Service
 public class AdminServiceImpl implements AdminService {
 
@@ -24,6 +26,7 @@ public class AdminServiceImpl implements AdminService {
      * @param user        the user to be banned
      * @return            true when the ban was successful
      */
+    @Transactional
     @Override
     public boolean banUser(User user) {
         user.setBanned(true);
@@ -40,6 +43,7 @@ public class AdminServiceImpl implements AdminService {
      * @param user        the user to be unbanned
      * @return            true when the unban was successful
      */
+    @Transactional
     @Override
     public boolean unbanUser(User user) {
         user.setBanned(false);
@@ -56,6 +60,7 @@ public class AdminServiceImpl implements AdminService {
      * @param recipe     the recipe to approve
      * @return           true when the approval was successful
      */
+    @Transactional
     @Override
     public boolean approveRecipe(Recipe recipe) {
         recipe.setApproved(true);
@@ -72,6 +77,7 @@ public class AdminServiceImpl implements AdminService {
      * @param recipe     the recipe to disapprove
      * @return           true when the disapproval was successful
      */
+    @Transactional
     @Override
     public boolean disapproveRecipe(Recipe recipe) {
         recipe.setDisapproved(true);
