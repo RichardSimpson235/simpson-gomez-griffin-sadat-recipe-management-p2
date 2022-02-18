@@ -37,7 +37,7 @@ public class Recipe {
     /**
      * Retrieves User data along with the Recipe data
      */
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "user_id")
     private User user;
 
@@ -64,6 +64,4 @@ public class Recipe {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "recipe_id")
     private List<Ingredient> ingredient;
-
-
 }
