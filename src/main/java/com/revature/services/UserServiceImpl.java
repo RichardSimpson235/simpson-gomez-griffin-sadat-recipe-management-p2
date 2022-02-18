@@ -5,6 +5,8 @@ import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -14,11 +16,21 @@ import java.util.Optional;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    UserRepository ur;
+    UserRepository userRepository;
 
+    /**
+     * This method is used to authenticate the user.
+     *
+     * @param username          username of the user
+     * @param password          password of the user
+     * @return                  Optional with a User object representing their data
+     */
+    @Transactional
     @Override
     public Optional<User> authenticate(String username, String password) {
-        return Optional.empty();
+      Optional<User> uNameAndPassword = userRepository.findByUsernameAndPassword(username, password);
+
+        return user;
     }
 
     @Override
@@ -38,7 +50,8 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public List<User> getAllUsers() {
-        return (List<User>) ur.findAll();
+
+        return (List<User>) userRepository.findAll();
     }
 
     @Override
