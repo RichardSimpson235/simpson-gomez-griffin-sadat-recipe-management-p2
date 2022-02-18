@@ -6,29 +6,41 @@ import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.transaction.Transactional;
+
 import java.util.List;
 import java.util.Optional;
 
-
-/**
- * The UserService Class is used to access and preform CRUD operations on the database.
- *
- */
 @Service
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
+
+    @Autowired
+    UserRepository userRepository;
 
     /**
-     * This is the repository object that User Services will access
+     * This method is used to authenticate the user.
+     *
+     * @param username          username of the user
+     * @param password          password of the user
+     * @return                  Optional with a User object representing their data
      */
-    @Autowired
-    UserRepository mUserRepository;
-
-
+    @Transactional
     @Override
     public Optional<User> authenticate(String username, String password) {
-        return Optional.empty();
+
+        return userRepository.findByUsernameAndPassword(username, password);
     }
 
+    /**
+     * This method is used to get all of the users in the database.
+     *
+     * @return                 a list of all the users
+     */
+    @Override
+    public List<User> getAllUsers() {
+
+        return (List<User>) userRepository.findAll();
+    }
 
     /**
      * This method is used to register a new user account.
@@ -38,7 +50,7 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User registerUser(User newUser) {
-        return mUserRepository.save(newUser);
+        return userRepository.save(newUser);
     }
 
     /**
@@ -49,18 +61,14 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User getUserById(int id) {
-        return mUserRepository.findById(id).orElse(new User());
+        return userRepository.findById(id).orElse(new User());
     }
-
-
-
 
     @Override
     public List<User> getAllUsers() {
 
         return null;
     }
-
 
     /**
      * This method is used to modify a user's account information.
@@ -70,6 +78,6 @@ public class UserServiceImpl implements UserService{
      */
     @Override
     public User updateUser(User change) {
-        return mUserRepository.save(change);
+        return userRepository.save(change);
     }
 }

@@ -1,8 +1,10 @@
 package com.revature.services;
 
 import com.revature.models.Recipe;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 
 public interface RecipeService {
 
