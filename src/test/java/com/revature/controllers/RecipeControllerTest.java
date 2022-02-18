@@ -1,6 +1,7 @@
 package com.revature.controllers;
 
 import com.revature.models.Recipe;
+import com.revature.models.RecipeDTO;
 import com.revature.models.User;
 import com.revature.services.RecipeService;
 import org.junit.jupiter.api.Test;
@@ -30,9 +31,9 @@ public class RecipeControllerTest {
 
     @Test
     public void testSearchByName() throws Exception {
-        Recipe rice = new Recipe();
+        RecipeDTO rice = new RecipeDTO();
         rice.setName("Rice pilaf");
-        List<Recipe> riceRecipes = new ArrayList<>();
+        List<RecipeDTO> riceRecipes = new ArrayList<>();
         riceRecipes.add(rice);
         when(recipeService.search("rice")).thenReturn(riceRecipes);
 
@@ -47,9 +48,9 @@ public class RecipeControllerTest {
 
     @Test
     void getAllRecipes() throws Exception {
-        Recipe recipe = new Recipe();
+        RecipeDTO recipe = new RecipeDTO();
         recipe.setName("Rice bun");
-        List<Recipe> recipeList = new ArrayList<>();
+        List<RecipeDTO> recipeList = new ArrayList<>();
         recipeList.add(recipe);
 
         when(recipeService.getAll()).thenReturn(recipeList);
@@ -60,10 +61,10 @@ public class RecipeControllerTest {
 
     @Test
     void getRecipeById() throws Exception {
-        Recipe recipe = new Recipe();
-        recipe.setRecipe_id(1);
+        RecipeDTO recipe = new RecipeDTO();
+        recipe.setId(1);
 
-        when(recipeService.getRecipeById(1)).thenReturn(new Recipe());
+        when(recipeService.getRecipeById(1)).thenReturn(new RecipeDTO());
 
         ResultActions rs = mvc.perform(MockMvcRequestBuilders.get("/recipes/1"));
         rs.andExpect(MockMvcResultMatchers.status().isOk());
