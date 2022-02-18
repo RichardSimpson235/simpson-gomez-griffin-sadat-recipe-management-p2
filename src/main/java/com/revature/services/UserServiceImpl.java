@@ -28,10 +28,10 @@ public class UserServiceImpl implements UserService {
     @Transactional
     @Override
     public Optional<User> authenticate(String username, String password) {
-      Optional<User> uNameAndPassword = userRepository.findByUsernameAndPassword(username, password);
 
-        return user;
-    }
+        return userRepository.findByUsernameAndPassword(username, password);
+        }
+
 
     @Override
     public User registerUser(User user) {

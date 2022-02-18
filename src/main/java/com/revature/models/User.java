@@ -13,4 +13,6 @@ public class User {
     @Id
 private int id;
 
+    private boolean banned;
+
 }
