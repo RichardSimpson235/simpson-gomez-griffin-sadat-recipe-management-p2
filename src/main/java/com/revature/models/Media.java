@@ -18,6 +18,9 @@ public class Media {
     @Column(name = "media_id", updatable = false)
     private int id;
 
+    @Column(name = "main_image")
+    private boolean mainImage;
+
     @Column(length = 50)
     private String type;
 
