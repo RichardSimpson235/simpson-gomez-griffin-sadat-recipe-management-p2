@@ -66,5 +66,4 @@ public class UserControllerTest {
                MockMvcResultMatchers.jsonPath("$").isNotEmpty()
        );
     }
-
 }
