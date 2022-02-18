@@ -1,10 +1,13 @@
 package com.revature.services;
 
 import com.revature.models.User;
+import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Repository
 public interface UserService {
 
     /**
@@ -30,7 +33,7 @@ public interface UserService {
      * @param id               id of the user to find
      * @return                 Optional with a User object representing their data
      */
-    public Optional<User> getUserById(int id);
+    public User getUserById(int id);
 
     /**
      * This method method is used to get all of the users in the database.
