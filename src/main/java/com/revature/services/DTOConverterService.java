@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -15,7 +16,71 @@ import java.util.List;
 
 @Transactional
 @Service
-public class DTOBuilderService {
+public class DTOConverterService {
+
+    public Recipe convertDTO(RecipeDTO recipe) {
+        Recipe r = new Recipe();
+        r.setRecipe_id(recipe.getId());
+        r.setName(recipe.getName());
+        r.setDescription(recipe.getDescription());
+        r.setCook_time(recipe.getCookTime());
+        r.setServings(recipe.getServings());
+        r.setLikes(recipe.getLikes());
+        r.setDislikes(recipe.getDislikes());
+        r.setApproved(recipe.isApproved());
+        r.setDisapproved(recipe.isDisapproved());
+
+        User u = new User();
+        u.setId(recipe.getUser().getId());
+        u.setBanned(recipe.getUser().isBanned());
+        u.setAdmin(recipe.getUser().isAdmin());
+        u.setFirstName(recipe.getUser().getFirstName());
+        u.setLastName(recipe.getUser().getLastName());
+        u.setUsername(recipe.getUser().getUsername());
+
+        r.setInstruction(recipe.getInstructions());
+        r.setMedia(recipe.getMedia());
+        r.setIngredient(recipe.getIngredients());
+        r.setUser(u);
+
+        return r;
+    }
+
+    // If the user enters an invalid date we set it to 0 (the front end should validate the format)
+    // Since User doesn't cascade we can use an empty list for recipes. This method is only used for
+    // creating new users and updating their fields.
+    public User convertDTO(UserDTO user) {
+        User u = new User();
+        u.setId(user.getId());
+        u.setBanned(user.isBanned());
+        u.setAdmin(user.isAdmin());
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setUsername(user.getUsername());
+        u.setPassword(user.getPassword());
+
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        Date dateOfBirth, registrationDate;
+        try {
+            dateOfBirth = format.parse(user.getDateOfBirth());
+        } catch (ParseException e) {
+            dateOfBirth = new Date(0);
+        }
+        u.setDateOfBirth(dateOfBirth.getTime());
+
+        try {
+            registrationDate = format.parse(user.getRegistrationDate());
+        } catch (ParseException e) {
+            registrationDate = new Date(0);
+        }
+        u.setRegistrationDate(registrationDate.getTime());
+
+        u.setEmail(user.getEmail());
+        u.setPhone(user.getPhone());
+        u.setRecipes(new ArrayList<>());
+
+        return u;
+    }
 
     /**
      * This method is used to build a data transfer object for users. We use this method

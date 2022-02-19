@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -21,7 +20,7 @@ public class RecipeServiceImpl implements RecipeService{
     RecipeRepository rc;
 
     @Autowired
-    DTOBuilderService dtoBuilderService;
+    DTOConverterService dtoConverterService;
 
     /**
      * This method is used to save new recipes in the database.
@@ -31,9 +30,9 @@ public class RecipeServiceImpl implements RecipeService{
      */
     @Override
     public RecipeDTO createRecipe(RecipeDTO recipe) {
-        Recipe r = convertDTO(recipe);
+        Recipe r = dtoConverterService.convertDTO(recipe);
         r = rc.save(r);
-        return dtoBuilderService.buildRecipeDTO(r);
+        return dtoConverterService.buildRecipeDTO(r);
     }
 
     /**
@@ -55,7 +54,7 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public RecipeDTO getRecipeById(int id) {
         Optional<Recipe> recipe = rc.findById(id);
-        return recipe.isPresent() ? dtoBuilderService.buildRecipeDTO(recipe.get()) : new RecipeDTO();
+        return recipe.isPresent() ? dtoConverterService.buildRecipeDTO(recipe.get()) : new RecipeDTO();
     }
 
     /**
@@ -66,7 +65,7 @@ public class RecipeServiceImpl implements RecipeService{
     @Override
     public List<RecipeDTO> getAll() {
         List<Recipe> recipes = (List<Recipe>) rc.findAll();
-        return recipes.stream().map(dtoBuilderService::buildRecipeDTO).collect(Collectors.toList());
+        return recipes.stream().map(dtoConverterService::buildRecipeDTO).collect(Collectors.toList());
     }
 
     /**
@@ -77,9 +76,9 @@ public class RecipeServiceImpl implements RecipeService{
      */
     @Override
     public RecipeDTO updateRecipe(RecipeDTO recipe) {
-        Recipe r = convertDTO(recipe);
+        Recipe r = dtoConverterService.convertDTO(recipe);
         r = rc.save(r);
-        return dtoBuilderService.buildRecipeDTO(r);
+        return dtoConverterService.buildRecipeDTO(r);
     }
 
     /**
@@ -93,33 +92,6 @@ public class RecipeServiceImpl implements RecipeService{
         List<Recipe> recipes = (List<Recipe>) rc.findAll();
         return recipes.stream().filter(recipe ->
             recipe.getName().toLowerCase().contains(nameSubstring)
-        ).map(dtoBuilderService::buildRecipeDTO).collect(Collectors.toList());
-    }
-
-    private Recipe convertDTO(RecipeDTO recipe) {
-        Recipe r = new Recipe();
-        r.setRecipe_id(recipe.getId());
-        r.setName(recipe.getName());
-        r.setDescription(recipe.getDescription());
-        r.setCook_time(recipe.getCookTime());
-        r.setServings(recipe.getServings());
-        r.setLikes(recipe.getLikes());
-        r.setDislikes(recipe.getDislikes());
-        r.setApproved(recipe.isApproved());
-        r.setDisapproved(recipe.isDisapproved());
-
-        User u = new User();
-        u.setId(recipe.getUser().getId());
-        u.setBanned(recipe.getUser().isBanned());
-        u.setAdmin(recipe.getUser().isAdmin());
-        u.setFirstName(recipe.getUser().getFirstName());
-        u.setLastName(recipe.getUser().getLastName());
-        u.setUsername(recipe.getUser().getUsername());
-
-        r.setInstruction(recipe.getInstructions());
-        r.setMedia(recipe.getMedia());
-        r.setIngredient(recipe.getIngredients());
-
-        return r;
+        ).map(dtoConverterService::buildRecipeDTO).collect(Collectors.toList());
     }
 }
