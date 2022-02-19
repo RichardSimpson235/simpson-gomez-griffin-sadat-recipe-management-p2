@@ -11,8 +11,8 @@ public class RecipeDTO {
     private String name;
     private String description;
     private String cookTime;
-    private int servings;
-    private boolean approved;
+    private int servings, likes, dislikes;
+    private boolean approved, disapproved;
 
     private UserDTO user;
 

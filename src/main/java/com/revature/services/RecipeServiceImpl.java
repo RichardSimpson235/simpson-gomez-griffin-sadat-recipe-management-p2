@@ -2,6 +2,7 @@ package com.revature.services;
 
 import com.revature.models.Recipe;
 import com.revature.models.RecipeDTO;
+import com.revature.models.User;
 import com.revature.repositories.RecipeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -29,8 +30,9 @@ public class RecipeServiceImpl implements RecipeService{
      * @return        a data transfer object of the newly created recipe
      */
     @Override
-    public RecipeDTO createRecipe(Recipe recipe) {
-        Recipe r = rc.save(recipe);
+    public RecipeDTO createRecipe(RecipeDTO recipe) {
+        Recipe r = convertDTO(recipe);
+        r = rc.save(r);
         return dtoBuilderService.buildRecipeDTO(r);
     }
 
@@ -74,8 +76,9 @@ public class RecipeServiceImpl implements RecipeService{
      * @return              the updated recipe as a data transfer object
      */
     @Override
-    public RecipeDTO updateRecipe(Recipe recipe) {
-        Recipe r = rc.save(recipe);
+    public RecipeDTO updateRecipe(RecipeDTO recipe) {
+        Recipe r = convertDTO(recipe);
+        r = rc.save(r);
         return dtoBuilderService.buildRecipeDTO(r);
     }
 
@@ -91,5 +94,32 @@ public class RecipeServiceImpl implements RecipeService{
         return recipes.stream().filter(recipe ->
             recipe.getName().toLowerCase().contains(nameSubstring)
         ).map(dtoBuilderService::buildRecipeDTO).collect(Collectors.toList());
+    }
+
+    private Recipe convertDTO(RecipeDTO recipe) {
+        Recipe r = new Recipe();
+        r.setRecipe_id(recipe.getId());
+        r.setName(recipe.getName());
+        r.setDescription(recipe.getDescription());
+        r.setCook_time(recipe.getCookTime());
+        r.setServings(recipe.getServings());
+        r.setLikes(recipe.getLikes());
+        r.setDislikes(recipe.getDislikes());
+        r.setApproved(recipe.isApproved());
+        r.setDisapproved(recipe.isDisapproved());
+
+        User u = new User();
+        u.setId(recipe.getUser().getId());
+        u.setBanned(recipe.getUser().isBanned());
+        u.setAdmin(recipe.getUser().isAdmin());
+        u.setFirstName(recipe.getUser().getFirstName());
+        u.setLastName(recipe.getUser().getLastName());
+        u.setUsername(recipe.getUser().getUsername());
+
+        r.setInstruction(recipe.getInstructions());
+        r.setMedia(recipe.getMedia());
+        r.setIngredient(recipe.getIngredients());
+
+        return r;
     }
 }

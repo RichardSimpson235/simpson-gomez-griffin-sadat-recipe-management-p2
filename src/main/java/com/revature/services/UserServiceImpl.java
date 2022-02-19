@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 import javax.transaction.Transactional;
 
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -66,9 +67,9 @@ public class UserServiceImpl implements UserService {
      * @return                    User object representing their data
      */
     @Override
-    public UserDTO registerUser(User newUser) {
-
-        User user =  userRepository.save(newUser);
+    public UserDTO registerUser(UserDTO newUser) {
+        User user = convertDTO(newUser);
+        user =  userRepository.save(user);
         return dtoBuilderService.buildUserDTO(user);
     }
 
@@ -92,8 +93,44 @@ public class UserServiceImpl implements UserService {
      * @return                  the modified user object gotten from the database
      */
     @Override
-    public UserDTO updateUser(User change) {
-        User user = userRepository.save(change);
+    public UserDTO updateUser(UserDTO change) {
+        User user = convertDTO(change);
+        user = userRepository.save(user);
         return dtoBuilderService.buildUserDTO(user);
+    }
+
+    // If the user enters an invalid date we set it to 0 (the front end should validate the format)
+    // Since User doesn't cascade we can use an empty list for recipes. This method is only used for
+    // creating new users and updating their fields.
+    private User convertDTO(UserDTO user) {
+        User u = new User();
+        u.setId(user.getId());
+        u.setBanned(user.isBanned());
+        u.setAdmin(user.isAdmin());
+        u.setFirstName(user.getFirstName());
+        u.setLastName(user.getLastName());
+        u.setUsername(user.getUsername());
+
+        DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
+        Date dateOfBirth, registrationDate;
+        try {
+            dateOfBirth = format.parse(user.getDateOfBirth());
+        } catch (ParseException e) {
+            dateOfBirth = new Date(0);
+        }
+        u.setDateOfBirth(dateOfBirth.getTime());
+
+        try {
+            registrationDate = format.parse(user.getRegistrationDate());
+        } catch (ParseException e) {
+            registrationDate = new Date(0);
+        }
+        u.setRegistrationDate(registrationDate.getTime());
+
+        u.setEmail(user.getEmail());
+        u.setPhone(user.getPhone());
+        u.setRecipes(new ArrayList<>());
+
+        return u;
     }
 }

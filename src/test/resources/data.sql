@@ -1,9 +1,9 @@
 INSERT INTO users VALUES
 (default, false, false, 0, 'email@gmail.com', 'first', 'last', 'password', '555-5555', 0, 'username');
 
-INSERT INTO recipes VALUES
-(default, true, '1.5 hrs', 'my recipe is tasty', 0, 0, 'recipe', 4, 1),
-(default, true, '2.5 hrs', 'other recipe', 0, 0, 'recipe2', 4, 1);
+INSERT INTO recipes (recipe_id, approved, disapproved, cook_time, description, likes, dislikes, name, servings, user_id) VALUES
+(default, true, false, '1.5 hrs', 'my recipe is tasty', 0, 0, 'recipe', 4, 1),
+(default, true, false, '2.5 hrs', 'other recipe', 0, 0, 'recipe2', 4, 1);
 
 INSERT INTO instructions VALUES
 (default, 1, 'do this thing', 1),
