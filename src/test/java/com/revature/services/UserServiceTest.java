@@ -3,6 +3,8 @@ package com.revature.services;
 import com.revature.models.*;
 import com.revature.repositories.UserRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
@@ -140,9 +142,19 @@ public class UserServiceTest {
         user.setEmail("email@gmail.com");
         user.setPhone("555-5555");
 
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
-        UserDTO u = userService.registerUser(user);
+        UserDTO u = new UserDTO();
+        u.setId(1);
+        u.setAdmin(false);
+        u.setFirstName("first");
+        u.setLastName("last");
+        u.setDateOfBirth("01/01/1970");
+        u.setRegistrationDate("01/01/1970");
+        u.setEmail("email@gmail.com");
+        u.setPhone("555-5555");
+
+        u = userService.registerUser(u);
 
         assertEquals(u.getId(), user.getId());
         assertEquals(u.isAdmin(), user.isAdmin());
@@ -234,9 +246,35 @@ public class UserServiceTest {
 
         user.setRecipes(recipes);
 
-        when(userRepository.save(user)).thenReturn(user);
+        when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
-        UserDTO u = userService.updateUser(user);
+        UserDTO u = new UserDTO();
+        u.setId(1);
+        u.setAdmin(false);
+        u.setFirstName("first");
+        u.setLastName("last");
+        u.setDateOfBirth("01/01/1970");
+        u.setRegistrationDate("01/01/1970");
+        u.setEmail("email@gmail.com");
+        u.setPhone("555-5555");
+
+        RecipeDTO r = new RecipeDTO();
+        r.setId(1);
+        r.setName("curry");
+        r.setDescription("yummy");
+        r.setCookTime("40 min");
+        r.setServings(4);
+        r.setApproved(true);
+        r.setInstructions(new ArrayList<>());
+        r.setMedia(new ArrayList<>());
+        r.setIngredients(new ArrayList<>());
+        r.setUser(u);
+
+        List<RecipeDTO> reps = new ArrayList<>();
+        reps.add(r);
+        u.setRecipes(reps);
+
+        u = userService.updateUser(u);
 
         assertEquals(u.getId(), user.getId());
         assertEquals(u.isAdmin(), user.isAdmin());
@@ -247,7 +285,7 @@ public class UserServiceTest {
 
         assertEquals(u.getRecipes().size(), 1);
 
-        RecipeDTO r = u.getRecipes().get(0);
+        r = u.getRecipes().get(0);
         assertEquals(r.getId(), recipe.getRecipe_id());
         assertEquals(r.getIngredients().size(), recipe.getIngredient().size());
         assertEquals(r.getInstructions().size(), recipe.getInstruction().size());
