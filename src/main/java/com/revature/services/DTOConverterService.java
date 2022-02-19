@@ -172,7 +172,9 @@ public class DTOConverterService {
         if(userDTO == null) {
             recipeDTO.setUser(buildUserDTO(recipe.getUser(), false));
         } else {
-            recipeDTO.setUser(userDTO);
+            UserDTO u = new UserDTO();
+            u.setId(userDTO.getId());
+            recipeDTO.setUser(u);
         }
 
         return recipeDTO;
