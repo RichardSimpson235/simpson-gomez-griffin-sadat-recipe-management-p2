@@ -1,6 +1,5 @@
 package com.revature.models;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -32,6 +31,7 @@ public class Recipe {
 
     private int servings, likes, dislikes;
     private boolean approved;
+    private boolean disapproved;
 
 
     /**
