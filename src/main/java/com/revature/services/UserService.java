@@ -26,7 +26,7 @@ public interface UserService {
      * @param user             user data to persist
      * @return                 User object representing their data
      */
-    public UserDTO registerUser(User user);
+    public UserDTO registerUser(UserDTO user);
 
     /**
      * This method is used to get the information of a single user by their id.
@@ -49,5 +49,5 @@ public interface UserService {
      * @param user             the modified user object
      * @return                 the modified user object gotten from the database
      */
-    public UserDTO updateUser(User user);
+    public UserDTO updateUser(UserDTO user);
 }
