@@ -13,7 +13,7 @@ public interface RecipeService {
      * @param recipe  Takes a recipe to add/persist into database.
      * @return        The newly added/created Recipe object/data.
      */
-    public RecipeDTO createRecipe(Recipe recipe);
+    public RecipeDTO createRecipe(RecipeDTO recipe);
 
     /**
      *
@@ -40,7 +40,7 @@ public interface RecipeService {
      * @param recipe        The recipe object to be updated in the Database.
      * @return              returns the updated Recipe object.
      */
-    public RecipeDTO updateRecipe(Recipe recipe);
+    public RecipeDTO updateRecipe(RecipeDTO recipe);
 
     /**
      *
