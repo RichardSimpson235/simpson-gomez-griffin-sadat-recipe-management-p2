@@ -87,16 +87,29 @@ public class UserServiceImpl implements UserService {
     }
 
     /**
-     * This method is used to modify a user's account information.
+     * This method is used to modify a user's account information. Since we don't
+     * want them updating their passwords we need account for that in the update. This
+     * could be expanded to handle all the fields.
      *
-     * @param change            the the actual changes/updates to the user object
+     * @param change            the actual changes/updates to the user object
      * @return                  the modified user object gotten from the database
      */
     @Override
     public UserDTO updateUser(UserDTO change) {
-        User user = convertDTO(change);
-        user = userRepository.save(user);
-        return dtoBuilderService.buildUserDTO(user);
+        Optional<User> user = userRepository.findById(change.getId());
+
+        if(user.isPresent()) {
+            User currentState = user.get();
+            User updatedState = convertDTO(change);
+
+            updatedState.setPassword(currentState.getPassword());
+            updatedState = userRepository.save(updatedState);
+
+            return dtoBuilderService.buildUserDTO(updatedState);
+
+        } else {
+            return new UserDTO();
+        }
     }
 
     // If the user enters an invalid date we set it to 0 (the front end should validate the format)
@@ -110,6 +123,7 @@ public class UserServiceImpl implements UserService {
         u.setFirstName(user.getFirstName());
         u.setLastName(user.getLastName());
         u.setUsername(user.getUsername());
+        u.setPassword(user.getPassword());
 
         DateFormat format = new SimpleDateFormat("MM/dd/yyyy");
         Date dateOfBirth, registrationDate;
