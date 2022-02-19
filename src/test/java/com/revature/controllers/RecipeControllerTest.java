@@ -1,5 +1,7 @@
 package com.revature.controllers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.revature.models.Recipe;
 import com.revature.models.RecipeDTO;
 import com.revature.models.User;
@@ -9,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
+import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
@@ -42,6 +45,48 @@ public class RecipeControllerTest {
         ra.andExpectAll(
                 MockMvcResultMatchers.status().isOk(),
                 MockMvcResultMatchers.jsonPath("$[0].name").value("Rice pilaf")
+        );
+    }
+
+    @Test
+    void addRecipe() throws Exception {
+        Recipe recipe = new Recipe();
+        recipe.setRecipe_id(1);
+        RecipeDTO recipeDTO = new RecipeDTO();
+        recipeDTO.setId(1);
+
+        ObjectMapper obj = new ObjectMapper();
+        String json = obj.writeValueAsString(recipe);
+
+        when(recipeService.createRecipe(recipe)).thenReturn(recipeDTO);
+        ResultActions ra = mvc.perform(MockMvcRequestBuilders.post("/recipes")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON));
+
+        ra.andExpectAll(
+                MockMvcResultMatchers.status().isOk(),
+                MockMvcResultMatchers.jsonPath("$.id").value(1)
+        );
+
+    }
+
+    @Test
+    void updateRecipe() throws Exception{
+        Recipe recipe = new Recipe();
+        recipe.setRecipe_id(1);
+        RecipeDTO recipeDTO = new RecipeDTO();
+        recipeDTO.setId(1);
+
+        ObjectMapper obj = new ObjectMapper();
+        String json = obj.writeValueAsString(recipe);
+
+        when(recipeService.updateRecipe(recipe)).thenReturn(recipeDTO);
+        ResultActions ra = mvc.perform(MockMvcRequestBuilders.put("/recipes")
+                .content(json)
+                .contentType(MediaType.APPLICATION_JSON));
+        ra.andExpectAll(
+                MockMvcResultMatchers.status().isOk(),
+                MockMvcResultMatchers.jsonPath("$.id").value(1)
         );
     }
 

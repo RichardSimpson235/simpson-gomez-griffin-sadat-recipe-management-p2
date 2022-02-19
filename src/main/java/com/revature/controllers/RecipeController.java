@@ -52,17 +52,7 @@ public class RecipeController {
      */
     @PostMapping(value = "/recipes", consumes = "application/json", produces = "application/json")
     public RecipeDTO addRecipe(@RequestBody Recipe recipe) {
-        Recipe recipe1 = recipeService.createRecipe(recipe);
-
-        RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDTO.setId(recipe1.getRecipe_id());
-        recipeDTO.setName(recipe1.getName());
-        recipeDTO.setDescription(recipe1.getDescription());
-        recipeDTO.setCook_time(recipe1.getCook_time());
-        recipeDTO.setServings(recipe1.getServings());
-        recipeDTO.setApproved(recipe1.isApproved());
-
-        return recipeDTO;
+        return recipeService.createRecipe(recipe);
     }
 
 
@@ -73,17 +63,7 @@ public class RecipeController {
      */
     @PutMapping(value = "/recipes", consumes = "application/json", produces = "application/json")
     public RecipeDTO updateRecipe(@RequestBody Recipe recipe) {
-        Recipe recipe1 = recipeService.updateRecipe(recipe);
-        RecipeDTO recipeDTO = new RecipeDTO();
-        recipeDTO.setId(recipe1.getRecipe_id());
-        recipeDTO.setName(recipe1.getName());
-        recipeDTO.setDescription(recipe1.getDescription());
-        recipeDTO.setCook_time(recipe1.getCook_time());
-        recipeDTO.setServings(recipe1.getServings());
-        recipeDTO.setApproved(recipe1.isApproved());
-
-        return recipeDTO;
-
+        return  recipeService.updateRecipe(recipe);
     }
 
     /**
