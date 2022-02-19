@@ -1,7 +1,9 @@
 package com.revature.services;
 
 import com.revature.models.Recipe;
+import com.revature.models.RecipeDTO;
 import com.revature.models.User;
+import com.revature.models.UserDTO;
 import com.revature.repositories.RecipeRepository;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +20,9 @@ public class AdminServiceImpl implements AdminService {
     @Autowired
     private RecipeRepository recipeRepository;
 
+    @Autowired
+    private DTOConverterService dtoConverterService;
+
     /**
      * Bans a user. This method sets the banned attribute to true
      * and then confirms that the entity retrieved from the database
@@ -28,11 +33,12 @@ public class AdminServiceImpl implements AdminService {
      */
     @Transactional
     @Override
-    public boolean banUser(User user) {
+    public boolean banUser(UserDTO user) {
         user.setBanned(true);
-        User usr = userRepository.save(user);
+        User u = dtoConverterService.convertDTO(user);
+        u = userRepository.save(u);
 
-        return user.isBanned() == usr.isBanned();
+        return user.isBanned() == u.isBanned();
     }
 
     /**
@@ -45,11 +51,12 @@ public class AdminServiceImpl implements AdminService {
      */
     @Transactional
     @Override
-    public boolean unbanUser(User user) {
+    public boolean unbanUser(UserDTO user) {
         user.setBanned(false);
-        User usr = userRepository.save(user);
+        User u = dtoConverterService.convertDTO(user);
+        u = userRepository.save(u);
 
-        return user.isBanned() == usr.isBanned();
+        return user.isBanned() == u.isBanned();
     }
 
     /**
@@ -62,9 +69,10 @@ public class AdminServiceImpl implements AdminService {
      */
     @Transactional
     @Override
-    public boolean approveRecipe(Recipe recipe) {
+    public boolean approveRecipe(RecipeDTO recipe) {
         recipe.setApproved(true);
-        Recipe r = recipeRepository.save(recipe);
+        Recipe r = dtoConverterService.convertDTO(recipe);
+        r = recipeRepository.save(r);
 
         return recipe.isApproved() == r.isApproved();
     }
@@ -79,9 +87,10 @@ public class AdminServiceImpl implements AdminService {
      */
     @Transactional
     @Override
-    public boolean disapproveRecipe(Recipe recipe) {
+    public boolean disapproveRecipe(RecipeDTO recipe) {
         recipe.setDisapproved(true);
-        Recipe r = recipeRepository.save(recipe);
+        Recipe r = dtoConverterService.convertDTO(recipe);
+        r = recipeRepository.save(r);
 
         return recipe.isDisapproved() == r.isDisapproved();
     }
