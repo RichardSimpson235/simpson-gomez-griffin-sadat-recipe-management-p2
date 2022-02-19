@@ -69,9 +69,9 @@ public class UserControllerTest {
         UserDTO userDTO = new UserDTO();
         userDTO.setId(1);
         ObjectMapper om = new ObjectMapper();
-        String json = om.writeValueAsString(user);
+        String json = om.writeValueAsString(userDTO);
 
-        when(userService.registerUser(user)).thenReturn(userDTO);
+        when(userService.registerUser(userDTO)).thenReturn(userDTO);
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.post("/register")
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON));

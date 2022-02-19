@@ -51,7 +51,7 @@ public class RecipeController {
      * @return        The added Recipe with a generated ID.
      */
     @PostMapping(value = "/recipes", consumes = "application/json", produces = "application/json")
-    public RecipeDTO addRecipe(@RequestBody Recipe recipe) {
+    public RecipeDTO addRecipe(@RequestBody RecipeDTO recipe) {
         return recipeService.createRecipe(recipe);
     }
 
@@ -62,7 +62,7 @@ public class RecipeController {
      * @return        Returns a DTO of the updated recipe.
      */
     @PutMapping(value = "/recipes", consumes = "application/json", produces = "application/json")
-    public RecipeDTO updateRecipe(@RequestBody Recipe recipe) {
+    public RecipeDTO updateRecipe(@RequestBody RecipeDTO recipe) {
         return  recipeService.updateRecipe(recipe);
     }
 

@@ -39,7 +39,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register")
-    public UserDTO addUser(@RequestBody User user) {
+    public UserDTO addUser(@RequestBody UserDTO user) {
         return userService.registerUser(user);
     }
 

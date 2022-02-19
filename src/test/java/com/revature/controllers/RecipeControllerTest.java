@@ -56,9 +56,9 @@ public class RecipeControllerTest {
         recipeDTO.setId(1);
 
         ObjectMapper obj = new ObjectMapper();
-        String json = obj.writeValueAsString(recipe);
+        String json = obj.writeValueAsString(recipeDTO);
 
-        when(recipeService.createRecipe(recipe)).thenReturn(recipeDTO);
+        when(recipeService.createRecipe(recipeDTO)).thenReturn(recipeDTO);
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.post("/recipes")
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON));
@@ -78,9 +78,9 @@ public class RecipeControllerTest {
         recipeDTO.setId(1);
 
         ObjectMapper obj = new ObjectMapper();
-        String json = obj.writeValueAsString(recipe);
+        String json = obj.writeValueAsString(recipeDTO);
 
-        when(recipeService.updateRecipe(recipe)).thenReturn(recipeDTO);
+        when(recipeService.updateRecipe(recipeDTO)).thenReturn(recipeDTO);
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.put("/recipes")
                 .content(json)
                 .contentType(MediaType.APPLICATION_JSON));
