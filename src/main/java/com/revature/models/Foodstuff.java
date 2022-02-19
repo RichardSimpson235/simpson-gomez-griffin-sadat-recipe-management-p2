@@ -10,23 +10,14 @@ import javax.persistence.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name="media")
-public class Media {
+@Table(name = "foodstuff")
+public class Foodstuff {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "media_id", updatable = false)
+    @Column(name = "foodstuff_id")
     private int id;
 
-    @Column(name = "main_image")
-    private boolean mainImage;
-
     @Column(length = 50)
-    private String type;
-
-    @Column(length = 50)
-    private String title;
-
-    @Lob
-    private byte[] data;
+    private String name;
 }

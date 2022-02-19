@@ -120,8 +120,8 @@ Only serves GET requests with query parameters
  * Returns json array of recipes that have been filtered to have a named that contains recipe_substring
 
 #### /users/
-Only serves GET and POST requests
- * POST used to create new users
+Only serves GET
+ * POST used to edit users (admins only)
  * GET used to get all users (only sent by admin accounts)
 
 #### /users/{id}
@@ -138,6 +138,8 @@ On admin page, have Users section for searching, banning, and unbanning users.
 On Recipe model add disapproved field (type boolean). When approve and disapprove are both false, an admin has not review
 ed them yet. When they do they set either to true. If approve is true, then all users can find it. If disapprove is true,
 then the recipe's author will see it marked on their recipe.
+
+When sending user data to this application it all needs to be in the json except for the password.
 
 # Git Standards
 Here we'll describe our plans for git.

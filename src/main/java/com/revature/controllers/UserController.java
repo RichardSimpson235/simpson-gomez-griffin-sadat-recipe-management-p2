@@ -38,15 +38,26 @@ public class UserController {
         return user.map(value -> new ResponseEntity<>(value, HttpStatus.OK)).orElseGet(() -> new ResponseEntity<>(HttpStatus.NOT_FOUND));
     }
 
+
+    /**
+     * This method is used to register a new user account.
+     *
+     * @param user             user data to persist
+     * @return                 User object representing their data
+     */
     @PostMapping(value = "/register")
     public UserDTO addUser(@RequestBody UserDTO user) {
         return userService.registerUser(user);
     }
 
+    /**
+     * This method is used to get all users in the database.
+     *
+     * @return                 a list of all the users
+     */
     @GetMapping(value = "/users")
     public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
     }
 
-
-    }
+}
