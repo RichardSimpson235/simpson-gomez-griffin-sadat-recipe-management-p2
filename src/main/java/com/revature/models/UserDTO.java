@@ -8,6 +8,7 @@ import java.util.List;
 public class UserDTO {
 
     private int id;
+    private boolean banned;
     private boolean admin;
     private String firstName;
     private String lastName;
