@@ -7,6 +7,7 @@ import com.revature.models.User;
 import com.revature.models.UserDTO;
 import com.revature.repositories.RecipeRepository;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -58,9 +59,31 @@ public class RecipeServiceTest {
 
         user.setRecipes(recipes);
 
-        when(rp.save(recipe)).thenReturn(recipe);
+        when(rp.save(Mockito.any(Recipe.class))).thenReturn(recipe);
 
-        RecipeDTO r = rs.createRecipe(recipe);
+        UserDTO u = new UserDTO();
+        u.setId(1);
+        u.setAdmin(false);
+        u.setFirstName("first");
+        u.setLastName("last");
+        u.setDateOfBirth("01/01/1970");
+        u.setRegistrationDate("01/01/1970");
+        u.setEmail("email@gmail.com");
+        u.setPhone("555-5555");
+
+        RecipeDTO r = new RecipeDTO();
+        r.setId(1);
+        r.setName("curry");
+        r.setDescription("yummy");
+        r.setCookTime("40 min");
+        r.setServings(4);
+        r.setApproved(true);
+        r.setInstructions(new ArrayList<>());
+        r.setMedia(new ArrayList<>());
+        r.setIngredients(new ArrayList<>());
+        r.setUser(u);
+
+        r = rs.createRecipe(r);
 
         assertEquals(r.getId(), recipe.getRecipe_id());
         assertEquals(r.getIngredients().size(), recipe.getIngredient().size());
@@ -189,9 +212,31 @@ public class RecipeServiceTest {
 
         user.setRecipes(recipes);
 
-        when(rp.save(recipe)).thenReturn(recipe);
+        when(rp.save(Mockito.any(Recipe.class))).thenReturn(recipe);
 
-        RecipeDTO r = rs.updateRecipe(recipe);
+        UserDTO u = new UserDTO();
+        u.setId(1);
+        u.setAdmin(false);
+        u.setFirstName("first");
+        u.setLastName("last");
+        u.setDateOfBirth("01/01/1970");
+        u.setRegistrationDate("01/01/1970");
+        u.setEmail("email@gmail.com");
+        u.setPhone("555-5555");
+
+        RecipeDTO r = new RecipeDTO();
+        r.setId(1);
+        r.setName("curry");
+        r.setDescription("yummy");
+        r.setCookTime("40 min");
+        r.setServings(4);
+        r.setApproved(true);
+        r.setInstructions(new ArrayList<>());
+        r.setMedia(new ArrayList<>());
+        r.setIngredients(new ArrayList<>());
+        r.setUser(u);
+
+        r = rs.updateRecipe(r);
 
         assertEquals(r.getId(), recipe.getRecipe_id());
         assertEquals(r.getIngredients().size(), recipe.getIngredient().size());
