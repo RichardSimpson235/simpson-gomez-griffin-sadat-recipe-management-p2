@@ -1,21 +1,32 @@
 package com.revature.services;
 
+import com.revature.models.Recipe;
+import com.revature.models.RecipeDTO;
 import com.revature.models.User;
 
+import com.revature.models.UserDTO;
 import com.revature.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
+@Transactional
 @Service
 public class UserServiceImpl implements UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    DTOBuilderService dtoBuilderService;
 
     /**
      * This method is used to authenticate the user.
@@ -26,9 +37,10 @@ public class UserServiceImpl implements UserService {
      */
     @Transactional
     @Override
-    public Optional<User> authenticate(String username, String password) {
+    public Optional<UserDTO> authenticate(String username, String password) {
 
-        return userRepository.findByUsernameAndPassword(username, password);
+        Optional<User> user = userRepository.findByUsernameAndPassword(username, password);
+        return user.map(value -> dtoBuilderService.buildUserDTO(value));
     }
 
     /**
@@ -36,10 +48,15 @@ public class UserServiceImpl implements UserService {
      *
      * @return                 a list of all the users
      */
-    @Override
-    public List<User> getAllUsers() {
+    public List<UserDTO> getAllUsers() {
+        List<User> users = (List<User>) userRepository.findAll();
+        List<UserDTO> userDTOs = new ArrayList<>();
 
-        return (List<User>) userRepository.findAll();
+        for (User user: users) {
+            userDTOs.add(dtoBuilderService.buildUserDTO(user));
+        }
+
+        return userDTOs;
     }
 
     /**
@@ -49,8 +66,10 @@ public class UserServiceImpl implements UserService {
      * @return                    User object representing their data
      */
     @Override
-    public User registerUser(User newUser) {
-        return userRepository.save(newUser);
+    public UserDTO registerUser(User newUser) {
+
+        User user =  userRepository.save(newUser);
+        return dtoBuilderService.buildUserDTO(user);
     }
 
     /**
@@ -60,14 +79,10 @@ public class UserServiceImpl implements UserService {
      * @return                 Optional with a User object representing their data
      */
     @Override
-    public User getUserById(int id) {
-        return userRepository.findById(id).orElse(new User());
-    }
+    public Optional<UserDTO> getUserById(int id) {
 
-    @Override
-    public List<User> getAllUsers() {
-
-        return null;
+        Optional<User> opUser = userRepository.findById(id);
+        return opUser.map(dtoBuilderService::buildUserDTO);
     }
 
     /**
@@ -77,7 +92,8 @@ public class UserServiceImpl implements UserService {
      * @return                  the modified user object gotten from the database
      */
     @Override
-    public User updateUser(User change) {
-        return userRepository.save(change);
+    public UserDTO updateUser(User change) {
+        User user = userRepository.save(change);
+        return dtoBuilderService.buildUserDTO(user);
     }
 }

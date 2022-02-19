@@ -17,5 +17,5 @@ public class UserDTO {
     private String email;
     private String phone;
 
-    private List<RecipeDTO> recipe;
+    private List<RecipeDTO> recipes;
 }
