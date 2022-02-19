@@ -139,6 +139,8 @@ On Recipe model add disapproved field (type boolean). When approve and disapprov
 ed them yet. When they do they set either to true. If approve is true, then all users can find it. If disapprove is true,
 then the recipe's author will see it marked on their recipe.
 
+When sending user data to this application it all needs to be in the json except for the password.
+
 # Git Standards
 Here we'll describe our plans for git.
 
