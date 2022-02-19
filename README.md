@@ -115,8 +115,8 @@ Takes PUT, DELETE, and GET.
  * PUT is used to update a recipe that is being viewed by its creator (or admin approving it)
  * DELETE is used to delete the recipe
 
-#### /search/{recipe_substring}
-Only serves GET requests
+#### /recipes/search
+Only serves GET requests with query parameters
  * Returns json array of recipes that have been filtered to have a named that contains recipe_substring
 
 #### /users/
@@ -138,6 +138,8 @@ On admin page, have Users section for searching, banning, and unbanning users.
 On Recipe model add disapproved field (type boolean). When approve and disapprove are both false, an admin has not review
 ed them yet. When they do they set either to true. If approve is true, then all users can find it. If disapprove is true,
 then the recipe's author will see it marked on their recipe.
+
+When sending user data to this application it all needs to be in the json except for the password.
 
 # Git Standards
 Here we'll describe our plans for git.
@@ -163,7 +165,7 @@ the branch and run all tests to check that they pass. You can also view code cha
 did. Make sure that it's not going to conflict with your work!).
 
 ## Commit Messages
-Follow this pattern for messageS:
+Follow this pattern for messages:
 type: present tense description of change
 
 For example:
