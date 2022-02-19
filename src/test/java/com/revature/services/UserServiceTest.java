@@ -246,6 +246,7 @@ public class UserServiceTest {
 
         user.setRecipes(recipes);
 
+        when(userRepository.findById(1)).thenReturn(Optional.of(user));
         when(userRepository.save(Mockito.any(User.class))).thenReturn(user);
 
         UserDTO u = new UserDTO();
