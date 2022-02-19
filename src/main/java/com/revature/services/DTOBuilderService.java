@@ -55,6 +55,8 @@ public class DTOBuilderService {
         userDTO.setAdmin(user.isAdmin());
         userDTO.setFirstName(user.getFirstName());
         userDTO.setLastName(user.getLastName());
+        userDTO.setUsername(user.getUsername());
+        userDTO.setPassword(user.getPassword());
         userDTO.setDateOfBirth(dateFormat.format(new Date(user.getDateOfBirth())));
         userDTO.setRegistrationDate(dateFormat.format(new Date(user.getRegistrationDate())));
         userDTO.setEmail(user.getEmail());
