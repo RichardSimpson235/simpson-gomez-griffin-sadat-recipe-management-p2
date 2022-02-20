@@ -22,5 +22,4 @@ public class Instruction {
 
     @Column(length = 50)
     private String text;
-
 }
