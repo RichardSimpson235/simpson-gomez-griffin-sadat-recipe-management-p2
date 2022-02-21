@@ -101,6 +101,12 @@ public class RecipeControllerTest {
         recipeService.deleteRecipe(recipe.getId());
         Mockito.verify(recipeService).deleteRecipe(recipe.getId());
 
+        ResultActions rs = mvc.perform(MockMvcRequestBuilders.delete("/recipes/1"));
+
+        rs.andExpect(
+                MockMvcResultMatchers.status().isOk()
+        );
+
 
     }
 
