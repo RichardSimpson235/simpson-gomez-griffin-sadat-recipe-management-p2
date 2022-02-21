@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
 
 @CrossOrigin
@@ -24,6 +25,18 @@ public class UserController {
     @Autowired
     UserService userService;
 
+    @PostMapping(value = "/login")
+    ResponseEntity<UserDTO> login(@RequestBody Map<String, String> authMap) {
+        Optional<UserDTO> user = userService.authenticate(authMap.get("username"), authMap.get("password"));
+
+        if (!user.isPresent()) {
+            return ResponseEntity.notFound().build();
+        } else if (user.get().isBanned()) {
+            return ResponseEntity.status(HttpStatus.FORBIDDEN).build();
+        } else {
+            return ResponseEntity.of(user);
+        }
+    }
 
     /**
      * Method retrieves a Users data from the database/backend by an id.
