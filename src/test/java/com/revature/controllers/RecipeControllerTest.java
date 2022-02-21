@@ -6,7 +6,9 @@ import com.revature.models.Recipe;
 import com.revature.models.RecipeDTO;
 import com.revature.models.User;
 import com.revature.services.RecipeService;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -20,6 +22,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 @AutoConfigureMockMvc
@@ -88,6 +91,17 @@ public class RecipeControllerTest {
                 MockMvcResultMatchers.status().isOk(),
                 MockMvcResultMatchers.jsonPath("$.id").value(1)
         );
+    }
+
+    @Test
+    void deleteRecipe() throws Exception {
+        RecipeDTO recipe = new RecipeDTO();
+        recipe.setId(1);
+
+        recipeService.deleteRecipe(recipe.getId());
+        Mockito.verify(recipeService).deleteRecipe(recipe.getId());
+
+
     }
 
 

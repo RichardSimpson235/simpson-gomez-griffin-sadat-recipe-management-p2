@@ -67,6 +67,15 @@ public class RecipeController {
     }
 
     /**
+     *  Method deletes a Recipe with the parsed ID
+     * @param id  Recipe ID to delete from the DataBase
+     */
+    @DeleteMapping(value = "/recipes/{id}")
+    public void deleteRecipe(@PathVariable String id){
+        recipeService.deleteRecipe(Integer.parseInt(id));
+    }
+
+    /**
      * Method retrieves a recipe from the database/backend by an id.
      *
      * @param id    The id of Recipe to be retrieved
