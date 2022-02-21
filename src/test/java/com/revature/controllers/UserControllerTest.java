@@ -84,6 +84,25 @@ public class UserControllerTest {
                 MockMvcResultMatchers.status().isOk(),
                 MockMvcResultMatchers.jsonPath("$.id").value(1)
         );
+    }
 
+    @Test
+    public void testLogin() throws Exception {
+        String username = "username";
+        String password = "password";
+
+        UserDTO user = new UserDTO();
+        user.setId(1);
+
+        when(userService.authenticate(username, password)).thenReturn(Optional.of(user));
+
+        ResultActions ra = mvc.perform(MockMvcRequestBuilders.post("/login")
+                .content("{\"username\":\"username\", \"password\":\"password\"}")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        ra.andExpectAll(
+                MockMvcResultMatchers.status().isOk(),
+                MockMvcResultMatchers.jsonPath("$.id").value(1)
+        );
     }
 }
