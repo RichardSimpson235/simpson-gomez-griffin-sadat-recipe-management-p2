@@ -7,12 +7,7 @@ import com.revature.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.Map;
@@ -71,6 +66,16 @@ public class UserController {
     @GetMapping(value = "/users")
     public List<UserDTO> getAllUsers(){
         return userService.getAllUsers();
+    }
+
+    /**
+     * This method is used to update the user.
+     * @param user            user data to persist
+     * @return                the updated user data
+     */
+    @PutMapping(value="/users")
+    public UserDTO updateUser(@RequestBody UserDTO user) {
+        return userService.updateUser(user);
     }
 
 }
