@@ -6,6 +6,7 @@ import com.revature.models.UserDTO;
 import com.revature.services.UserService;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mock;
+import org.mockito.Mockito;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -98,6 +99,26 @@ public class UserControllerTest {
 
         ResultActions ra = mvc.perform(MockMvcRequestBuilders.post("/login")
                 .content("{\"username\":\"username\", \"password\":\"password\"}")
+                .contentType(MediaType.APPLICATION_JSON));
+
+        ra.andExpectAll(
+                MockMvcResultMatchers.status().isOk(),
+                MockMvcResultMatchers.jsonPath("$.id").value(1)
+        );
+    }
+
+    @Test
+    public void testUpdateUser() throws Exception {
+        UserDTO u = new UserDTO();
+        u.setId(1);
+
+        ObjectMapper om = new ObjectMapper();
+        String json = om.writeValueAsString(u);
+
+        when(userService.updateUser(Mockito.any(UserDTO.class))).thenReturn(u);
+
+        ResultActions ra = mvc.perform(MockMvcRequestBuilders.put("/users")
+                .content(json)
                 .contentType(MediaType.APPLICATION_JSON));
 
         ra.andExpectAll(
