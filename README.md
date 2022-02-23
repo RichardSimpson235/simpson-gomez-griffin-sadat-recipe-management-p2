@@ -117,7 +117,7 @@ Takes PUT and GET requests.
 
 
 
-## Usage
+## Demo
 This is the back-end system for the front-end web application
 https://github.com/RichardSimpson235/simpson-gomez-griffin-sadat-recipe-management-p3-front/tree/main
 
