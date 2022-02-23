@@ -124,8 +124,8 @@ https://github.com/RichardSimpson235/simpson-gomez-griffin-sadat-recipe-manageme
 
 ## Contributors
 
-* Abdul Samad Sadat   https://github.com/RichardSimpson235
-* Alejandro Gomez     https://github.com/alxgoz
-* Clyde Griffin       https://github.com/cagriffin13
-* Richard Simpson     https://github.com/Milanoboy20
+* Abdul Samad Sadat:   https://github.com/Milanoboy20
+* Alejandro Gomez:     https://github.com/alxgoz
+* Clyde Griffin:       https://github.com/cagriffin13
+* Richard Simpson:     https://github.com/RichardSimpson235
 
